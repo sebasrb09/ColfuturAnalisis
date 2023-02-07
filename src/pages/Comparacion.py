@@ -83,7 +83,6 @@ def main():
         if opcion_general != 'Universidad':
             count_unis_1 = df[df[dicc[opcion_general]] == option1].groupby([dicc[opcion_general],'UniPos2','url']).size().reset_index(name='Conteo').sort_values(by='Conteo',ascending=False).head()
             st.subheader('Top 5 Universidades a las que aplican en '+option1)
-            print(count_unis_1)
             size = count_unis_1.shape[0]
             cols = st.columns(size)
             for i in range(size):
