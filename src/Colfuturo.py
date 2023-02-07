@@ -32,15 +32,16 @@ def main():
     df = cargar_df()
 
     st.header(':red[Colfuturo] credito-beca 	:flag-co:')
-    st.write('Bienvenido! Este es un proyecto donde vas a poder ver los datos de los ganadores del credito beca de Colfuturo de una manera más interactiva. \n' + 
+    st.write('¡Bienvenido! Este es un proyecto donde vas a poder ver los datos de los ganadores del credito beca de Colfuturo de una manera más interactiva. \n' + 
     'En el panel izquierdo podrás filtrar el año de convocatoria, área del estudio y el tipo de estudio.')
-    st.write('En el panel izquierdo también vas a encontrar la pagina de comparación, ahí podrás comparar dos paises, ciudades o universidades.')
+    st.write('En el panel izquierdo también vas a encontrar la pagina de comparación, ahí podrás comparar dos paises, ciudades o universidades. También están la página de trabajo futuro, en el cual se discute cuales pueden ser las siguientes mejoras al tablero.')
     st.write('Existen dos tipos de personas en los datos, los beneficiarios y los seleccionados. Lo más probable es que los seleccionados hayan ganado la convocatoria, pero por alguna razón, no llegaron a ser beneficiarios.')
     st.write('Este es un proyecto independiente, no esta vinculado a Colfuturo y fue realizado con los datos abiertos de la entidad')
     st.write('En este momento la convocatoria para el año 2023 esta abierta! Puedes dar en este botón que te va a redirigir a la página oficial para que puedas aplicar :point_down:')
     url = 'https://www.colfuturo.org/programas/credito-beca/convocatoria'
     if st.button('Convocatoria 2023'):
         webbrowser.open_new_tab(url)
+
     years = st.sidebar.slider(
         label="Selecciona el rango de años",
         min_value=2000,
@@ -68,7 +69,7 @@ def main():
     df = query_field_mult('Tipo',selected_tipos,df)
     
     st.subheader('¿A donde van los Colombianos con la beca? :earth_americas:')
-    st.map(data=df)
+    st.map(data=df,zoom=0.6,use_container_width=True)
     benef = df[df['Estado'] == 'beneficiario']
     select = df[df['Estado'] == 'seleccionado']
     if select.shape[0] > 0:

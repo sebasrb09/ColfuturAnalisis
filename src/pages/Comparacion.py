@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 
-dicc = {'País':'País','Ciudad':'Ciudad_Destino','Universidad':'Univ. Posgrado'}
+dicc = {'País':'País','Ciudad':'Ciudad_Destino','Universidad':'UniPos2'}
 
 @st.cache
 def cargar_df():
@@ -79,5 +79,28 @@ def main():
         with col4:
             st.write(option2)
             st.dataframe(count_pos_df[count_pos_df[dicc[opcion_general]] == option2][['Posgrado','Conteo']].sort_values(by='Conteo',ascending=False).head(10))
+
+        if opcion_general != 'Universidad':
+            count_unis_1 = df[df[dicc[opcion_general]] == option1].groupby([dicc[opcion_general],'UniPos2','url']).size().reset_index(name='Conteo').sort_values(by='Conteo',ascending=False).head()
+            st.subheader('Top 5 Universidades a las que aplican en '+option1)
+            print(count_unis_1)
+            size = count_unis_1.shape[0]
+            cols = st.columns(size)
+            for i in range(size):
+                with cols[i]:
+                    st.write(count_unis_1.iloc[i]['UniPos2'])
+                    if count_unis_1.iloc[i]['url'] != 'NotFound':
+                        st.write('[Página de la Universidad]('+count_unis_1.iloc[i]['url']+')')
+            
+            st.subheader('Top 5 Universidades a las que aplican en '+option2)
+            count_unis_2 = df[df[dicc[opcion_general]] == option2].groupby([dicc[opcion_general],'UniPos2','url']).size().reset_index(name='Conteo').sort_values(by='Conteo',ascending=False).head()
+            size = count_unis_2.shape[0]
+            cols = st.columns(size)
+            for i in range(size):
+                with cols[i]:
+                    st.write(count_unis_2.iloc[i]['UniPos2'])
+                    if count_unis_2.iloc[i]['url'] != 'NotFound':
+                        st.write('[Página de la Universidad]('+count_unis_2.iloc[i]['url']+')')
+
 
 main()
