@@ -10,3 +10,10 @@ Para lanzar la aplicación localmente, ejecutar el siguiente comando en un ambie
 ```
 streamlit run src/Home.py
 ```
+
+## Página Online
+
+La página la pueden consultar en el siguiente link:
+
+![AnalisisColfuturo](https://sebasrb09-colfuturanalisis-srccolfuturo-rfk64v.streamlit.app/)
+
