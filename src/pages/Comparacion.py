@@ -100,6 +100,15 @@ def main():
                     st.write(count_unis_2.iloc[i]['UniPos2'])
                     if count_unis_2.iloc[i]['url'] != 'NotFound':
                         st.write('[Página de la Universidad]('+count_unis_2.iloc[i]['url']+')')
+        else:
+            url1 = df[df[dicc[opcion_general]] == option1]['url'].unique()[0]
+            url2 = df[df[dicc[opcion_general]] == option2]['url'].unique()[0]
+            if url1 != 'NotFound' or url2 != 'NotFound':
+                st.subheader('¿Quieres conocer más sobre las universidades?')
+            if url1 != 'NotFound':
+                st.write('Puedes consultar la página de '+option1+' acá:[link]('+url1+')')
+            if url2 != 'NotFound':
+                st.write('Puedes consultar la página de '+option2+' acá:[link]('+url2+')')
 
 
 main()

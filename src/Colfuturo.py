@@ -112,8 +112,14 @@ def plot_given_state(estado,df):
             )
             
     gen_selec = df.groupby(['Género']).size().reset_index(name='Conteo')
-    fig = px.pie(gen_selec, values='Conteo', names='Género', title='Género de los ' + text_labels,
-                color_discrete_sequence=px.colors.qualitative.Pastel)
+    fig = px.pie(gen_selec, values='Conteo', names='Género',
+                    title='Género de los ' + text_labels,
+                    color='Género',
+                    color_discrete_map={'Masculino':px.colors.qualitative.Pastel[8],
+                    'Femenino':px.colors.qualitative.Pastel[3],
+                    'Otro':px.colors.qualitative.Pastel[1]},
+                )
+                        
     fig.update_traces(textposition='inside', textinfo='percent+label')
     st.plotly_chart(fig,use_container_width=True)
         
